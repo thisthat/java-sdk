@@ -1,5 +1,6 @@
 package dev.openfeature.sdk;
 
+import dev.openfeature.sdk.exceptions.GeneralError;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,27 +39,27 @@ class ClientCallbackTest {
 
         @Override
         public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx) {
-            return null;
+            throw new GeneralError("unknown error");
         }
 
         @Override
         public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx) {
-            return null;
+            throw new GeneralError("unknown error");
         }
 
         @Override
         public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx) {
-            return null;
+            throw new GeneralError("unknown error");
         }
 
         @Override
         public ProviderEvaluation<Double> getDoubleEvaluation(String key, Double defaultValue, EvaluationContext ctx) {
-            return null;
+            throw new GeneralError("unknown error");
         }
 
         @Override
         public ProviderEvaluation<Value> getObjectEvaluation(String key, Value defaultValue, EvaluationContext ctx) {
-            return null;
+            throw new GeneralError("unknown error");
         }
     }
 }
