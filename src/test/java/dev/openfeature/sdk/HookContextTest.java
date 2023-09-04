@@ -16,7 +16,9 @@ class HookContextTest {
                 meta,
                 meta,
                 new ImmutableContext(),
-                false
+                () -> {
+                    return false;
+                }
         );
 
         assertTrue(Metadata.class.isAssignableFrom(hc.getClientMetadata().getClass()));

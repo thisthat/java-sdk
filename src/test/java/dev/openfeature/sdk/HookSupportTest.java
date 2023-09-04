@@ -26,7 +26,7 @@ class HookSupportTest implements HookFixtures {
         Map<String, Value> attributes = new HashMap<>();
         attributes.put("baseKey", new Value("baseValue"));
         EvaluationContext baseContext = new ImmutableContext(attributes);
-        HookContext<String> hookContext = new HookContext<>("flagKey", FlagValueType.STRING, "defaultValue", baseContext, () -> "client", () -> "provider");
+        HookContext<String> hookContext = new HookContext<>("flagKey", FlagValueType.STRING, () -> "defaultValue", baseContext, () -> "client", () -> "provider");
         Hook<String> hook1 = mockStringHook();
         Hook<String> hook2 = mockStringHook();
         when(hook1.before(any(), any())).thenReturn(Optional.of(evaluationContextWithValue("bla", "blubber")));
@@ -48,7 +48,7 @@ class HookSupportTest implements HookFixtures {
         HookSupport hookSupport = new HookSupport();
         EvaluationContext baseContext = new ImmutableContext();
         IllegalStateException expectedException = new IllegalStateException("All fine, just a test");
-        HookContext<Object> hookContext = new HookContext<>("flagKey", flagValueType, createDefaultValue(flagValueType), baseContext, () -> "client", () -> "provider");
+        HookContext<Object> hookContext = new HookContext<>("flagKey", flagValueType, () -> createDefaultValue(flagValueType), baseContext, () -> "client", () -> "provider");
 
         hookSupport.beforeHooks(flagValueType, hookContext, Collections.singletonList(genericHook), Collections.emptyMap());
         hookSupport.afterHooks(flagValueType, hookContext, FlagEvaluationDetails.builder().build(), Collections.singletonList(genericHook), Collections.emptyMap());

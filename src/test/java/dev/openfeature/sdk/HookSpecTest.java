@@ -68,7 +68,7 @@ class HookSpecTest implements HookFixtures {
             HookContext.<Integer>builder()
                     .flagKey("key")
                     .type(FlagValueType.INTEGER)
-                    .defaultValue(1)
+                    .defaultValue(() -> 1)
                     .build();
             fail("Missing context shouldn't be valid");
         } catch (NullPointerException e) {
@@ -80,7 +80,7 @@ class HookSpecTest implements HookFixtures {
             HookContext.<Integer>builder()
                     .flagKey("key")
                     .ctx(null)
-                    .defaultValue(1)
+                    .defaultValue(() -> 1)
                     .build();
             fail("Missing type shouldn't be valid");
         } catch (NullPointerException e) {
@@ -92,7 +92,7 @@ class HookSpecTest implements HookFixtures {
             HookContext.<Integer>builder()
                     .type(FlagValueType.INTEGER)
                     .ctx(null)
-                    .defaultValue(1)
+                    .defaultValue(() -> 1)
                     .build();
             fail("Missing key shouldn't be valid");
         } catch (NullPointerException e) {
@@ -117,7 +117,7 @@ class HookSpecTest implements HookFixtures {
                     .flagKey("key")
                     .type(FlagValueType.INTEGER)
                     .ctx(new ImmutableContext())
-                    .defaultValue(1)
+                    .defaultValue(() -> 1)
                     .build();
         } catch (NullPointerException e) {
             fail("NPE after we provided all relevant info");
@@ -132,7 +132,7 @@ class HookSpecTest implements HookFixtures {
                 .flagKey("key")
                 .type(FlagValueType.INTEGER)
                 .ctx(new ImmutableContext())
-                .defaultValue(1)
+                .defaultValue(() -> 1)
                 .build();
 
         // add optional provider
@@ -141,7 +141,7 @@ class HookSpecTest implements HookFixtures {
                 .type(FlagValueType.INTEGER)
                 .ctx(new ImmutableContext())
                 .providerMetadata(new NoOpProvider().getMetadata())
-                .defaultValue(1)
+                .defaultValue(() -> 1)
                 .build();
 
         // add optional client
@@ -149,7 +149,7 @@ class HookSpecTest implements HookFixtures {
                 .flagKey("key")
                 .type(FlagValueType.INTEGER)
                 .ctx(new ImmutableContext())
-                .defaultValue(1)
+                .defaultValue(() -> 1)
                 .clientMetadata(OpenFeatureAPI.getInstance().getClient().getMetadata())
                 .build();
     }
