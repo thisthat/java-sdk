@@ -5,6 +5,9 @@ import lombok.NonNull;
 import lombok.Value;
 import lombok.With;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 /**
  * A data class to hold immutable context that {@link Hook} instances use.
  *
@@ -14,7 +17,7 @@ import lombok.With;
 public class HookContext<T> {
     @NonNull String flagKey;
     @NonNull FlagValueType type;
-    @NonNull T defaultValue;
+    @NonNull Supplier<T> defaultValue;
     @NonNull EvaluationContext ctx;
     Metadata clientMetadata;
     Metadata providerMetadata;
@@ -31,7 +34,7 @@ public class HookContext<T> {
      * @return resulting context for hook
      */
     public static <T> HookContext<T> from(String key, FlagValueType type, Metadata clientMetadata,
-                                          Metadata providerMetadata, EvaluationContext ctx, T defaultValue) {
+                                          Metadata providerMetadata, EvaluationContext ctx, Supplier<T> defaultValue) {
         return HookContext.<T>builder()
                 .flagKey(key)
                 .type(type)

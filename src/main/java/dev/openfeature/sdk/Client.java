@@ -1,11 +1,19 @@
 package dev.openfeature.sdk;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Interface used to resolve flags of varying types.
  */
 public interface Client extends Features, EventBus<Client> {
+    Boolean getBooleanValue(String key, Supplier<Boolean> defaultValue);
+
+    FlagEvaluationDetails<Boolean> getBooleanDetails(String key, Supplier<Boolean> defaultValue);
+
+    FlagEvaluationDetails<Boolean> getBooleanDetails(String key, Supplier<Boolean> defaultValue, EvaluationContext ctx,
+                                                     FlagEvaluationOptions options);
+
     Metadata getMetadata();
 
     /**
